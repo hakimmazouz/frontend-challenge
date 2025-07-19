@@ -24,17 +24,13 @@ function NodeWidget({ instance, startPosition, className }: Props) {
   const position = useRef<Point2D>({ ...startPosition });
   const ref = useRef<HTMLDivElement | null>(null);
   const [bind] = useDraggable({
-    onDrag: ({ delta, dist, prev }) => {
-      if (ref.current) {
-        const { transform } = window.getComputedStyle(ref.current);
+    onDrag: ({ delta }) => {
+      positionNode({
+        x: position.current.x + delta.x,
+        y: position.current.y + delta.y,
+      });
 
-        positionNode({
-          x: position.current.x + delta.x,
-          y: position.current.y + delta.y,
-        });
-
-        context.events.emit("node-position-update", { instance });
-      }
+      context.events.emit("node-position-update", { instance });
     },
   });
 
