@@ -7,18 +7,22 @@ import {
 } from "@/lib/nodes";
 import { SVGProps, useEffect, useRef, useState } from "react";
 
-interface Props extends Omit<SVGProps<SVGElement>, "ref"> {
+interface Props extends SVGProps<SVGSVGElement> {
   fromNode: NodeInstance;
   toNode: NodeInstance;
 }
 
-function NodeConnector({ fromNode, toNode, ...props }: Props) {
+function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
   const ref = useRef<SVGSVGElement | null>(null);
   const lineRef = useRef<SVGPolylineElement | null>(null);
   const context = useWorkflowCanvas();
   const [xFlow, setXFlow] = useState<"regular" | "reverse">("regular");
+  const connectorIsFocused =
+    context.focusedNodes.includes(toNode) &&
+    context.focusedNodes.includes(fromNode);
   const relatedNodeIsFocused =
-    context.focusedNode == fromNode || context.focusedNode == toNode;
+    context.focusedNodes.includes(toNode) ||
+    context.focusedNodes.includes(fromNode);
 
   function renderConnector({ instance }: { instance: NodeInstance }) {
     if (instance.id == fromNode.id || instance.id == toNode.id) {
@@ -81,11 +85,15 @@ function NodeConnector({ fromNode, toNode, ...props }: Props) {
       ref={ref}
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
+      onMouseEnter={() => context.setFocusedNodes([fromNode, toNode])}
+      onMouseLeave={() => context.setFocusedNodes([])}
       className={cls(
         "fixed top-0 left-0 transition-opacity duration-300",
-        !context.focusedNode && "opacity-30",
-        context.focusedNode && !relatedNodeIsFocused && "opacity-5",
-        relatedNodeIsFocused && "opacity-100"
+        // !context.focusedNodes.length && "opacity-30",
+        // !!context.focusedNodes.length && !relatedNodeIsFocused && "opacity-5",
+        context.focusedNodes.length > 0 && !relatedNodeIsFocused && "opacity-5",
+        relatedNodeIsFocused && "opacity-100",
+        className
       )}>
       <polyline
         ref={lineRef}

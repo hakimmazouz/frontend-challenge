@@ -14,7 +14,7 @@ interface Props extends React.ComponentProps<"div"> {
 function WorkflowCanvas({ config }: Props) {
   const nodeLayerRef = useRef<HTMLDivElement | null>(null);
   const connectorsLayerRef = useRef<HTMLDivElement | null>(null);
-  const [focusedNode, setFocusedNode] = useState<NodeInstance | undefined>();
+  const [focusedNodes, setFocusedNodes] = useState<NodeInstance[]>([]);
 
   return (
     <div className="inset-0 fixed bg-stone-900">
@@ -23,8 +23,9 @@ function WorkflowCanvas({ config }: Props) {
           ...WorkflowCanvasContextDefaultValue,
           connectorsLayerRef: connectorsLayerRef,
           nodeLayerRef: nodeLayerRef,
-          focusedNode,
-          setFocusedNode: (instance?: NodeInstance) => setFocusedNode(instance),
+          focusedNodes,
+          setFocusedNodes: (instances: NodeInstance[]) =>
+            setFocusedNodes(instances),
         }}>
         <WorkflowConnectorsLayer
           ref={connectorsLayerRef}

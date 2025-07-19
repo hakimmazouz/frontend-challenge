@@ -1,4 +1,3 @@
-import { useWorkflowCanvas } from "@/contexts/WorkflowCanvasContext";
 import { NodeInstance } from "@/lib/const";
 import { forwardRef, Ref, useEffect, useState } from "react";
 import NodeConnector from "./NodeConnector";
@@ -25,7 +24,6 @@ interface Props extends React.ComponentProps<"div"> {
 }
 
 function WorkflowConnectorsLayer({ nodes }: Props, ref: Ref<HTMLDivElement>) {
-  const context = useWorkflowCanvas();
   const [connectors, setConnectors] = useState<NodeConnector[]>([]);
 
   useEffect(() => {

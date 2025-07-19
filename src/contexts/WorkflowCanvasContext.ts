@@ -15,15 +15,15 @@ export interface WorkflowCanvasContextValue {
   connectorsLayerRef: MutableRefObject<HTMLDivElement | null> | null;
   nodeLayerRef: MutableRefObject<HTMLDivElement | null> | null;
   events: EventEmitter<NodeEvents>;
-  focusedNode: NodeInstance | undefined;
-  setFocusedNode: (instance?: NodeInstance) => void;
+  focusedNodes: NodeInstance[];
+  setFocusedNodes: (instances: NodeInstance[]) => void;
 }
 
 export const WorkflowCanvasContextDefaultValue: WorkflowCanvasContextValue = {
   connectorsLayerRef: null,
   nodeLayerRef: null,
-  focusedNode: undefined,
-  setFocusedNode: (instance?: NodeInstance) => {},
+  focusedNodes: [],
+  setFocusedNodes: (instances: NodeInstance[]) => {},
   events,
 };
 

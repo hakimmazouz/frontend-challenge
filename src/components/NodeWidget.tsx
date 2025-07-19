@@ -22,35 +22,31 @@ function NodeWidget({ instance, startPosition, className }: Props) {
         x: position.current.x + delta.x,
         y: position.current.y + delta.y,
       });
-
-      context.events.emit("node-position-update", { instance });
     },
   });
 
-  function positionNode(pos?: Point2D) {
-    if (pos?.x) {
-      position.current.x = pos.x;
-    }
-    if (pos?.y) {
-      position.current.y = pos.y;
+  function positionNode(newPosition?: Point2D) {
+    if (newPosition) {
+      position.current.x = newPosition.x;
+      position.current.y = newPosition.y;
     }
 
     if (ref.current) {
       ref.current.style.transform = `translate(${position.current.x}px, ${position.current.y}px)`;
+      context.events.emit("node-position-update", { instance });
     }
   }
 
   useEffect(() => {
     positionNode();
-    context.events.emit("node-position-update", { instance });
   }, []);
 
   return (
     <div
       ref={ref}
       data-node-id={instance.id}
-      onMouseEnter={() => context.setFocusedNode(instance)}
-      onMouseLeave={() => context.setFocusedNode()}
+      onMouseEnter={() => context.setFocusedNodes([instance])}
+      onMouseLeave={() => context.setFocusedNodes([])}
       className={cls(
         "rounded-2xl bg-stone-800 border-stone-600 aspect-[1.2] w-60 text-white border select-none origin-center",
         className
