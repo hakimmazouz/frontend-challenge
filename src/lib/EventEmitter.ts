@@ -34,17 +34,3 @@ class EventEmitter<T extends Subscriber> {
 }
 
 export default EventEmitter;
-
-// interface NodeUpdateEvent {
-//   event: 'node-update';
-//   callback: (param: { nodeId: string }) => void
-// }
-
-// interface NodeDeleteEvent {
-//   event: 'node-delete';
-//   callback: () => void // so this one has different params to accept
-// }
-
-// type NodeEvents = NodeUpdateEvent | NodeDeleteEvent
-
-// new EventEmitter<NodeEvents>()

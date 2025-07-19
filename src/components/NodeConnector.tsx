@@ -89,8 +89,6 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
       onMouseLeave={() => context.setFocusedNodes([])}
       className={cls(
         "fixed top-0 left-0 transition-opacity duration-300",
-        // !context.focusedNodes.length && "opacity-30",
-        // !!context.focusedNodes.length && !relatedNodeIsFocused && "opacity-5",
         context.focusedNodes.length > 0 && !relatedNodeIsFocused && "opacity-5",
         relatedNodeIsFocused && "opacity-100",
         className
