@@ -29,21 +29,27 @@ export const useDraggable = ({ onDrag }: UseDraggableParams) => {
     delta.y = 0;
     dist.x = 0;
     dist.y = 0;
-    prev.x = null;
-    prev.y = null;
+    prev.x = 0;
+    prev.y = 0;
   };
 
-  const onMouseDown = useCallback(() => {
-    resetDragState();
+  const onMouseDown = useCallback(
+    ({ clientX, clientY }: React.MouseEvent<HTMLElement>) => {
+      resetDragState();
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-  }, []);
+      const { prev } = dragState.current;
+
+      prev.x = clientX;
+      prev.y = clientY;
+
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+    },
+    []
+  );
 
   const onMouseMove = useCallback(({ clientX, clientY }: MouseEvent) => {
     const { delta, prev, dist } = dragState.current;
-    if (!prev.x) prev.x = clientX;
-    if (!prev.y) prev.y = clientY;
 
     delta.x = clientX - prev.x;
     delta.y = clientY - prev.y;
