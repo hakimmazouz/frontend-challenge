@@ -1,11 +1,4 @@
-import {
-  CircleEllipsisIcon,
-  DotIcon,
-  MenuIcon,
-  PersonStandingIcon,
-  UserIcon,
-  WrenchIcon,
-} from "lucide-react";
+import { DotIcon, UserIcon, WrenchIcon } from "lucide-react";
 import Avatar from "./Avatar";
 import Pill from "./Pill";
 import { Point2D, useDraggable } from "@/lib/hooks";
