@@ -43,8 +43,8 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
           yFlow,
           xFlow: latestXFlow,
         } = getConnectorSizeAndPosition(fromBounds, toBounds);
-        const flipY = yFlow == "to-top";
-        const flipX = latestXFlow == "reverse";
+        const flipY = yFlow == "to-bottom";
+        const flipX = latestXFlow == "regular";
 
         ref.current.style.width = `${distance}px`;
         ref.current.style.height = `${height}px`;
@@ -62,7 +62,7 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
 
     function animateDashOffset() {
       if (lineRef.current) {
-        const offset = performance.now() * -0.05;
+        const offset = performance.now() * 0.01;
         lineRef.current.setAttribute("stroke-dashoffset", offset.toString());
       }
 
@@ -89,15 +89,15 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
       onMouseLeave={() => context.setFocusedNodes([])}
       className={cls(
         "fixed top-0 left-0 transition-opacity duration-300",
+        !context.focusedNodes.length && !relatedNodeIsFocused && "opacity-40",
         context.focusedNodes.length > 0 && !relatedNodeIsFocused && "opacity-5",
         relatedNodeIsFocused && "opacity-100",
         className
       )}>
       <polyline
         ref={lineRef}
-        strokeDasharray={8}
-        strokeDashoffset={0}
-        points={"0,0 50,0 50,100 100,100"}
+        strokeDasharray="12"
+        points={"0,4 50,4 50,96 100,96"}
         stroke="white"
         vectorEffect="non-scaling-stroke"
         fill="none"

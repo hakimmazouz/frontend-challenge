@@ -24,6 +24,7 @@ function NodeWidget({ instance, startPosition, className }: Props) {
       });
     },
   });
+  const isFocused = context.focusedNodes.includes(instance);
 
   function positionNode(newPosition?: Point2D) {
     if (newPosition) {
@@ -48,7 +49,8 @@ function NodeWidget({ instance, startPosition, className }: Props) {
       onMouseEnter={() => context.setFocusedNodes([instance])}
       onMouseLeave={() => context.setFocusedNodes([])}
       className={cls(
-        "rounded-2xl bg-stone-800 border-stone-600 aspect-[1.2] w-60 text-white border select-none origin-center",
+        "rounded-2xl  border-stone-600 aspect-[1.2] w-60 text-white border select-none origin-center transition-colors duration-300 hover:cursor-grab active:cursor-grabbing",
+        isFocused ? "bg-stone-700" : "bg-stone-800",
         className
       )}
       {...bind}>
