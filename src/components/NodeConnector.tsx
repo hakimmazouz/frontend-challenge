@@ -22,6 +22,7 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
     context.focusedNodes.includes(fromNode);
 
   function renderConnector({ instance }: { instance: NodeInstance }) {
+    if (!context.nodeLayerRef?.current) return;
     if (instance.id == fromNode.id || instance.id == toNode.id) {
       const { fromElement, toElement } = getNodeElWithOutputNodeEl(
         context.nodeLayerRef?.current!,

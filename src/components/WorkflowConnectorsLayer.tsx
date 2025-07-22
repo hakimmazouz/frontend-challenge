@@ -11,7 +11,8 @@ function collectConnectors(instances: NodeInstance[]) {
         toNode: instances.find((i) => i.id == outputInstance)!,
       }))
     )
-    .flat();
+    .flat()
+    .filter((connector) => !!connector.toNode);
 }
 
 interface NodeConnector {

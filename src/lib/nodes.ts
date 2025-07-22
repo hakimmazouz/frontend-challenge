@@ -76,11 +76,11 @@ export function getNodeStartPositions(instances: NodeInstance[]) {
     instance: NodeInstance;
     parent?: NodeInstance;
   }) {
-    if (positions[instance.id]) return;
+    if (positions[instance?.id]) return;
 
     const isChild = !!parent;
     const singleChild = isChild && parent.outputToNodeId.length == 1;
-    const index = isChild ? parent?.outputToNodeId?.indexOf(instance.id) : 0;
+    const index = isChild ? parent?.outputToNodeId?.indexOf(instance?.id) : 0;
     const length = isChild ? parent?.outputToNodeId?.length : 1;
     const totalYSpread = singleChild ? 0 : 160 * length - 1;
 
