@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { EXAMPLE_WORKFLOW_CONFIG, WorkflowConfig } from "@/lib/const";
+import { EXAMPLE_WORKFLOW_CONFIG } from "@/lib/const";
+import { WorkflowConfig } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {

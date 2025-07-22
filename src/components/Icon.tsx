@@ -1,4 +1,4 @@
-import { IconName } from "@/lib/const";
+import { IconName } from "@/types";
 import {
   ArrowRightCircleIcon,
   BadgeDollarSignIcon,

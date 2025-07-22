@@ -1,7 +1,6 @@
-import { NodeInstance } from "@/lib/const";
 import { forwardRef, Ref, useEffect, useState } from "react";
 import NodeConnector from "./NodeConnector";
-import { useWorkflowCanvas } from "@/contexts/WorkflowCanvasContext";
+import { NodeInstance } from "@/types";
 
 function collectConnectors(instances: NodeInstance[]) {
   return instances

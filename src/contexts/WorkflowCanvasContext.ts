@@ -1,19 +1,7 @@
-import { NodeInstance } from "@/lib/const";
 import EventEmitter from "@/lib/EventEmitter";
-import { Point2D } from "@/lib/hooks";
+
+import { NodeEvents, NodeInstance, Point2D } from "@/types";
 import { createContext, MutableRefObject, useContext } from "react";
-
-interface NodeUpdateEvent {
-  event: "node-position-update";
-  callback: (context: { instance: NodeInstance }) => void;
-}
-
-interface NodeDeleteEvent {
-  event: "node-delete";
-  callback: (context: {}) => void;
-}
-
-type NodeEvents = NodeUpdateEvent | NodeDeleteEvent;
 
 const events = new EventEmitter<NodeEvents>();
 export interface WorkflowCanvasContextValue {

@@ -1,13 +1,11 @@
-import { DotIcon, UserIcon, WrenchIcon } from "lucide-react";
-import Avatar from "./Avatar";
-import Pill from "./Pill";
-import { Point2D, useDraggable } from "@/lib/hooks";
+import { DotIcon } from "lucide-react";
+import { useDraggable } from "@/lib/hooks";
 import { useEffect, useRef } from "react";
-import { NodeInstance } from "@/lib/const";
 import { cls } from "@/lib/dom";
 import { useWorkflowCanvas } from "@/contexts/WorkflowCanvasContext";
 import NodeWidgetParams from "./NodeWidgetParams";
 import Icon from "./Icon";
+import { NodeInstance, Point2D } from "@/types";
 
 interface Props extends React.ComponentProps<"div"> {
   instance: NodeInstance;

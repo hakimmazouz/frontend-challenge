@@ -1,7 +1,8 @@
 import Guide from "@/components/Guide";
 import WorkflowCanvas from "@/components/WorkflowCanvas";
 import { getWorkflowConfig } from "@/lib/api";
-import { WorkflowConfig } from "@/lib/const";
+import { WorkflowConfig } from "@/types";
+
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 

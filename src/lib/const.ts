@@ -1,36 +1,4 @@
-export type NodeInstanceId = string;
-export type NodeParamType = "reference" | "auto";
-export type IconName =
-  | "dollar-sign"
-  | "shield"
-  | "wrench"
-  | "hammer"
-  | "arrow-right-circle"
-  | "pencil"
-  | "send";
-
-export type Node = {
-  type: string;
-  icon: IconName;
-  description: string;
-};
-
-export type NodeInstanceParam = {
-  type: NodeParamType;
-  value: string;
-  title: string;
-};
-
-export type NodeInstance = {
-  id: NodeInstanceId;
-  node: Node;
-  outputToNodeId: NodeInstanceId[];
-  params?: NodeInstanceParam[];
-};
-
-export type WorkflowConfig = {
-  nodes: NodeInstance[];
-};
+import { WorkflowConfig } from "@/types";
 
 export const EXAMPLE_WORKFLOW_CONFIG: WorkflowConfig = {
   nodes: [

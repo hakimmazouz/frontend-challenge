@@ -1,5 +1,4 @@
-import { NodeInstance } from "./const";
-import { Point2D } from "./hooks";
+import { NodeInstance, Point2D } from "@/types";
 import { mapConstrain } from "./math";
 
 export function getNodeElWithOutputNodeEl(

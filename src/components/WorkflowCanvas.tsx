@@ -1,4 +1,3 @@
-import { NodeInstance, WorkflowConfig } from "@/lib/const";
 import WorkflowNodeLayer from "./WorkflowNodeLayer";
 import WorkflowConnectorsLayer from "./WorkflowConnectorsLayer";
 import {
@@ -6,8 +5,8 @@ import {
   WorkflowCanvasContextDefaultValue,
 } from "@/contexts/WorkflowCanvasContext";
 import { useEffect, useRef, useState } from "react";
-import { Point2D, useDraggable } from "@/lib/hooks";
-import { constrain } from "@/lib/math";
+import { useDraggable } from "@/lib/hooks";
+import { NodeInstance, Point2D, WorkflowConfig } from "@/types";
 
 interface Props extends React.ComponentProps<"div"> {
   config: WorkflowConfig;

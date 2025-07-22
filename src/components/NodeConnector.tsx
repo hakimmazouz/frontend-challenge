@@ -1,10 +1,10 @@
 import { useWorkflowCanvas } from "@/contexts/WorkflowCanvasContext";
-import { NodeInstance } from "@/lib/const";
 import { cls } from "@/lib/dom";
 import {
   getConnectorSizeAndPosition,
   getNodeElWithOutputNodeEl,
 } from "@/lib/nodes";
+import { NodeInstance } from "@/types";
 import { SVGProps, useEffect, useRef, useState } from "react";
 
 interface Props extends SVGProps<SVGSVGElement> {

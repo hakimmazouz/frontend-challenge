@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-
-export type Point2D = { x: number; y: number };
+import { Point2D } from "@/types";
+import { useCallback, useRef } from "react";
 
 interface DragState {
   delta: Point2D;
@@ -20,8 +19,6 @@ type UseDraggableValue = [
 export const useDraggable = ({
   onDrag,
 }: UseDraggableParams): UseDraggableValue => {
-  const DRAG_START_THRESHOLD = 0;
-  const hasDragged = useRef<boolean>(false);
   const dragState = useRef<DragState>({
     delta: { x: 0, y: 0 },
     prev: { x: 0, y: 0 },
@@ -30,7 +27,6 @@ export const useDraggable = ({
 
   const resetDragState = () => {
     const { delta, dist, prev } = dragState.current;
-    hasDragged.current = false;
 
     delta.x = 0;
     delta.y = 0;

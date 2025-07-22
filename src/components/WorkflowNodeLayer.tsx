@@ -1,7 +1,7 @@
-import { NodeInstance } from "@/lib/const";
 import NodeWidget from "./NodeWidget";
 import { forwardRef, Ref, useMemo } from "react";
 import { getNodeStartPositions } from "@/lib/nodes";
+import { NodeInstance } from "@/types";
 
 interface Props extends React.ComponentProps<"div"> {
   nodes: NodeInstance[];

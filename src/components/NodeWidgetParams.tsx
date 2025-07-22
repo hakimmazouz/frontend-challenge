@@ -1,7 +1,7 @@
-import { NodeInstanceParam } from "@/lib/const";
 import Pill from "./Pill";
 import Avatar from "./Avatar";
 import { UserIcon } from "lucide-react";
+import { NodeInstanceParam } from "@/types";
 
 interface Props extends React.ComponentProps<"ul"> {
   params: NodeInstanceParam[];

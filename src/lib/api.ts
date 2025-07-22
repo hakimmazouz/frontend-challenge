@@ -1,4 +1,4 @@
-import { WorkflowConfig } from "./const";
+import { WorkflowConfig } from "@/types";
 
 interface FetchResult<R> {
   data?: R;
