@@ -6,6 +6,8 @@ import { useEffect, useRef } from "react";
 import { NodeInstance } from "@/lib/const";
 import { cls } from "@/lib/dom";
 import { useWorkflowCanvas } from "@/contexts/WorkflowCanvasContext";
+import NodeWidgetParams from "./NodeWidgetParams";
+import Icon from "./Icon";
 
 interface Props extends React.ComponentProps<"div"> {
   instance: NodeInstance;
@@ -56,8 +58,13 @@ function NodeWidget({ instance, startPosition, className }: Props) {
       {...bind}>
       <div className="inner-container p-4 flex flex-col justify-between h-full">
         <div className="header flex items-start justify-between">
-          <div className="icon w-8 h-8 bg-black rounded-full items-center justify-center flex">
-            <WrenchIcon size={16} stroke="white" strokeWidth={1.5} />
+          <div className="icon w-7 h-7 bg-black rounded-full items-center justify-center flex">
+            <Icon
+              name={instance.node.icon}
+              size={16}
+              stroke="white"
+              strokeWidth={1.5}
+            />
           </div>
           <div className="menu -space-x-3 flex">
             <DotIcon size={20} />
@@ -68,14 +75,9 @@ function NodeWidget({ instance, startPosition, className }: Props) {
         <div className="content">
           <p className="text-base font-medium">{instance.node.type}</p>
           <p className="opacity-60 text-sm">{instance.node.description}</p>
-          <div className="params mt-4">
-            <Pill>
-              <Avatar className="bg-green-300 h-4 w-4">
-                <UserIcon stroke="black" size={12} />
-              </Avatar>
-              <span>Darlene Johnson</span>
-            </Pill>
-          </div>
+          {instance.params && (
+            <NodeWidgetParams params={instance.params} className="mt-4" />
+          )}
         </div>
       </div>
     </div>

@@ -17,9 +17,6 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
   const lineRef = useRef<SVGPolylineElement | null>(null);
   const context = useWorkflowCanvas();
   const [xFlow, setXFlow] = useState<"regular" | "reverse">("regular");
-  const connectorIsFocused =
-    context.focusedNodes.includes(toNode) &&
-    context.focusedNodes.includes(fromNode);
   const relatedNodeIsFocused =
     context.focusedNodes.includes(toNode) ||
     context.focusedNodes.includes(fromNode);
@@ -45,12 +42,15 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
         } = getConnectorSizeAndPosition(fromBounds, toBounds);
         const flipY = yFlow == "to-bottom";
         const flipX = latestXFlow == "regular";
+        const { canvasOffset } = context;
 
         ref.current.style.width = `${distance}px`;
         ref.current.style.height = `${height}px`;
-        ref.current.style.transform = `translate(${position.x}px, ${
-          position.y
-        }px) scaleY(${flipY ? -1 : 1}) scaleX(${flipX ? -1 : 1})`;
+        ref.current.style.transform = `translate(${
+          position.x - canvasOffset.x
+        }px, ${position.y - canvasOffset.y}px) scaleY(${
+          flipY ? -1 : 1
+        }) scaleX(${flipX ? -1 : 1})`;
 
         if (xFlow !== latestXFlow) setXFlow(latestXFlow);
       }

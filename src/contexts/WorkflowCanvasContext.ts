@@ -8,7 +8,12 @@ interface NodeUpdateEvent {
   callback: (context: { instance: NodeInstance }) => void;
 }
 
-type NodeEvents = NodeUpdateEvent;
+interface NodeDeleteEvent {
+  event: "node-delete";
+  callback: (context: {}) => void;
+}
+
+type NodeEvents = NodeUpdateEvent | NodeDeleteEvent;
 
 const events = new EventEmitter<NodeEvents>();
 export interface WorkflowCanvasContextValue {
@@ -16,6 +21,7 @@ export interface WorkflowCanvasContextValue {
   nodeLayerRef: MutableRefObject<HTMLDivElement | null> | null;
   events: EventEmitter<NodeEvents>;
   focusedNodes: NodeInstance[];
+  canvasOffset: Point2D;
   setFocusedNodes: (instances: NodeInstance[]) => void;
 }
 
@@ -23,6 +29,7 @@ export const WorkflowCanvasContextDefaultValue: WorkflowCanvasContextValue = {
   connectorsLayerRef: null,
   nodeLayerRef: null,
   focusedNodes: [],
+  canvasOffset: { x: 0, y: 0 },
   setFocusedNodes: (instances: NodeInstance[]) => {},
   events,
 };

@@ -1,3 +1,4 @@
+import Guide from "@/components/Guide";
 import WorkflowCanvas from "@/components/WorkflowCanvas";
 import { getWorkflowConfig } from "@/lib/api";
 import { WorkflowConfig } from "@/lib/const";
@@ -21,7 +22,8 @@ export default function Home() {
   }, []);
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
+      className={`flex min-h-screen flex-col items-center justify-between p-24 bg-stone-900 ${inter.className}`}>
+      <Guide />
       {workflow && <WorkflowCanvas config={workflow} />}
     </main>
   );

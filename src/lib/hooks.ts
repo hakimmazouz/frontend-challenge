@@ -12,7 +12,14 @@ interface UseDraggableParams {
   onDrag: (dragState: DragState) => void;
 }
 
-export const useDraggable = ({ onDrag }: UseDraggableParams) => {
+type UseDraggableValue = [
+  { onMouseDown: (event: React.MouseEvent<HTMLElement>) => void },
+  DragState
+];
+
+export const useDraggable = ({
+  onDrag,
+}: UseDraggableParams): UseDraggableValue => {
   const DRAG_START_THRESHOLD = 0;
   const hasDragged = useRef<boolean>(false);
   const dragState = useRef<DragState>({
