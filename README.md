@@ -9,7 +9,7 @@ I tried to solve this in a pragmatic way. I tried improving on some things:
 
 Lots of things I would have liked to work on, like fleshing out the canvas (2 finger pan, wheel zooming) and nail the data structure (though that would be more of a backend dev task). The data structure is just for rendering this, I didn't think through a full proper scenario.
 
-I particularly like the type safe event emitter. You might notice that I use refs a lot to add dynamic styling, instead of putting it on the nodes in the context. This is to avoid rerenders on every single mousemovement. However, in a real world scenario, if we were to save the positions, it could have made sense to save it somewhere so all the data flows 1 way.
+I particularly like the type safe event emitter. You might notice that I use refs a lot to add dynamic styling, instead of putting it on the nodes in the context. This is to avoid rerenders on every single mousemovement. However, in a real world scenario, if we were to save the positions, it could have made sense to save it somewhere so all the data flows 1 way. Another thing is the Icon component, I'd much rather have it load icons dynamically instead of shipping all icon instances in 1 component.
 
 No libraries were installed, and no generative AI was used for this.
 
