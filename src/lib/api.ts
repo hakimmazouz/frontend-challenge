@@ -5,12 +5,13 @@ interface FetchResult<R> {
   error?: string;
 }
 
-type ApiFetch<P, R> = (params?: P) => Promise<FetchResult<R>>;
+export type ApiFetch<R, P = undefined> = (
+  params?: P
+) => Promise<FetchResult<R>>;
 
 export type GetWorkflowConfigResponse = { workflow: WorkflowConfig };
 
 export const getWorkflowConfig: ApiFetch<
-  unknown,
   GetWorkflowConfigResponse
 > = async () => {
   const response = await fetch("/api/workflow");

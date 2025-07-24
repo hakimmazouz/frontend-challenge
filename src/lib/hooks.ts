@@ -1,5 +1,6 @@
 import { Point2D } from "@/types";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ApiFetch } from "./api";
 
 interface DragState {
   delta: Point2D;
@@ -72,4 +73,30 @@ export const useDraggable = ({
   }, []);
 
   return [{ onMouseDown }, dragState.current];
+};
+
+export const useFetch = <R, P = undefined>(
+  fetcher: ApiFetch<R, P>,
+  params?: P
+) => {
+  const [state, setState] = useState<"loading" | "done">("done");
+  const [data, setData] = useState<R>();
+  const [error, setError] = useState<string>();
+
+  useEffect(() => {
+    setState("loading");
+    fetcher(params).then(({ data, error }) => {
+      setData(data || undefined);
+      setError(error || undefined);
+      setState("done");
+    });
+  }, [fetcher]);
+
+  return {
+    data,
+    error,
+    state,
+    isLoading: state == "loading",
+    isDone: state == "done",
+  };
 };
