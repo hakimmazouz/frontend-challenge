@@ -66,10 +66,10 @@ export const useDraggable = ({
     onDrag(dragState.current);
   }, []);
 
-  const onMouseUp = () => {
+  const onMouseUp = useCallback(() => {
     window.removeEventListener("mousemove", onMouseMove);
     window.removeEventListener("mouseup", onMouseUp);
-  };
+  }, []);
 
   return [{ onMouseDown }, dragState.current];
 };
