@@ -1,6 +1,19 @@
 import { NodeInstance, Point2D } from "@/types";
 import { mapConstrain } from "./math";
 
+export function collectConnectors(instances: NodeInstance[]) {
+  return instances
+    .filter((instance) => instance.outputToNodeId.length)
+    .map((instance) =>
+      instance.outputToNodeId.map((outputInstance) => ({
+        fromNode: instance,
+        toNode: instances.find((i) => i.id == outputInstance)!,
+      }))
+    )
+    .flat()
+    .filter((connector) => !!connector.toNode);
+}
+
 export function getNodeElWithOutputNodeEl(
   el: HTMLDivElement,
   fromNode: NodeInstance,

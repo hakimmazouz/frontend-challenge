@@ -61,23 +61,9 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
   useEffect(() => {
     const unsub = context.events.on("node-position-update", renderConnector);
 
-    function animateDashOffset() {
-      if (lineRef.current) {
-        const offset = performance.now() * 0.01;
-        lineRef.current.setAttribute("stroke-dashoffset", offset.toString());
-      }
-
-      raf = requestAnimationFrame(animateDashOffset);
-    }
-
-    let raf = requestAnimationFrame(animateDashOffset);
-
     renderConnector({ instance: fromNode });
 
-    return () => {
-      unsub();
-      cancelAnimationFrame(raf);
-    };
+    return unsub;
   }, [xFlow]);
 
   return (
@@ -98,6 +84,7 @@ function NodeConnector({ fromNode, toNode, className, ...props }: Props) {
       <polyline
         ref={lineRef}
         strokeDasharray="12"
+        className="animate-marching-ants"
         points={"0,4 50,4 50,96 100,96"}
         stroke="white"
         vectorEffect="non-scaling-stroke"

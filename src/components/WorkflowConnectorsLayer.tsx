@@ -1,31 +1,14 @@
 import { forwardRef, Ref, useEffect, useState } from "react";
 import NodeConnector from "./NodeConnector";
-import { NodeInstance } from "@/types";
-
-function collectConnectors(instances: NodeInstance[]) {
-  return instances
-    .filter((instance) => instance.outputToNodeId.length)
-    .map((instance) =>
-      instance.outputToNodeId.map((outputInstance) => ({
-        fromNode: instance,
-        toNode: instances.find((i) => i.id == outputInstance)!,
-      }))
-    )
-    .flat()
-    .filter((connector) => !!connector.toNode);
-}
-
-interface NodeConnector {
-  fromNode: NodeInstance;
-  toNode: NodeInstance;
-}
+import { NodeConnectorConfig, NodeInstance } from "@/types";
+import { collectConnectors } from "@/lib/nodes";
 
 interface Props extends React.ComponentProps<"div"> {
   nodes: NodeInstance[];
 }
 
 function WorkflowConnectorsLayer({ nodes }: Props, ref: Ref<HTMLDivElement>) {
-  const [connectors, setConnectors] = useState<NodeConnector[]>([]);
+  const [connectors, setConnectors] = useState<NodeConnectorConfig[]>([]);
 
   useEffect(() => {
     setConnectors(collectConnectors(nodes));

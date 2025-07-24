@@ -1,5 +1,4 @@
 import EventEmitter from "@/lib/EventEmitter";
-
 import { NodeEvents, NodeInstance, Point2D } from "@/types";
 import { createContext, MutableRefObject, useContext } from "react";
 

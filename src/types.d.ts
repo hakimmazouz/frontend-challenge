@@ -32,6 +32,11 @@ export type WorkflowConfig = {
   nodes: NodeInstance[];
 };
 
+export interface NodeConnectorConfig {
+  fromNode: NodeInstance;
+  toNode: NodeInstance;
+}
+
 export interface NodeUpdateEvent {
   event: "node-position-update";
   callback: (context: { instance: NodeInstance }) => void;
